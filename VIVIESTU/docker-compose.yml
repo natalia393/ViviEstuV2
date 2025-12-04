@@ -1,0 +1,24 @@
+services:
+  app:
+    container_name: mi-backend-spring
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      # 1. URL JDBC CONSTRUIDA (Adaptada para Neon)
+      # Nota: Cambié 'postgresql://' por 'jdbc:postgresql://' y mantuve el sslmode
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ep-aged-poetry-adsl820l-pooler.c-2.us-east-1.aws.neon.tech/db_viviestu?sslmode=require
+
+      # 2. CREDENCIALES
+      - SPRING_DATASOURCE_USERNAME=neondb_owner
+      - SPRING_DATASOURCE_PASSWORD=npg_t45AFgkXhvLN
+
+      # 3. CONFIGURACIÓN JPA / HIBERNATE
+      # Importante para que Spring "hable" bien con Postgres
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+      # 'update' intentará crear las tablas si no existen.
+      # Úsalo en desarrollo. Para producción real, usa 'validate' o 'none'.
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+      # Opcional: Para ver las consultas SQL en la consola (útil para debug)
+      - SPRING_JPA_SHOW_SQL=true
