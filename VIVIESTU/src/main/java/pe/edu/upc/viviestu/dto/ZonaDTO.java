@@ -3,10 +3,15 @@ package pe.edu.upc.viviestu.dto;
 public class ZonaDTO {
     private Integer idZona;
     private String nombreZona;
+    private String distrito;
     private Double precioPromedio;
-    private String seguridad; // ej "alta", "media", "baja"
-    private String transporteDisponible; // ej "bus, carro, caminar"
-    private Boolean recomendado; // ej "true" = Recomendado, "false" = Recomendar
+    private Integer nivelSeguridad;
+    private String accesibilidadTransporte;
+    private String serviciosCercanos;
+    private String descripcion;
+    private Double latitud;
+    private Double longitud;
+    private String imagenUrl;
 
     public Integer getIdZona() {
         return idZona;
@@ -24,6 +29,14 @@ public class ZonaDTO {
         this.nombreZona = nombreZona;
     }
 
+    public String getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
+    }
+
     public Double getPrecioPromedio() {
         return precioPromedio;
     }
@@ -32,27 +45,59 @@ public class ZonaDTO {
         this.precioPromedio = precioPromedio;
     }
 
-    public String getSeguridad() {
-        return seguridad;
+    public Integer getNivelSeguridad() {
+        return nivelSeguridad;
     }
 
-    public void setSeguridad(String seguridad) {
-        this.seguridad = seguridad;
+    public void setNivelSeguridad(Integer nivelSeguridad) {
+        this.nivelSeguridad = nivelSeguridad;
     }
 
-    public String getTransporteDisponible() {
-        return transporteDisponible;
+    public String getAccesibilidadTransporte() {
+        return accesibilidadTransporte;
     }
 
-    public void setTransporteDisponible(String transporteDisponible) {
-        this.transporteDisponible = transporteDisponible;
+    public void setAccesibilidadTransporte(String accesibilidadTransporte) {
+        this.accesibilidadTransporte = accesibilidadTransporte;
     }
 
-    public Boolean getRecomendado() {
-        return recomendado;
+    public String getServiciosCercanos() {
+        return serviciosCercanos;
     }
 
-    public void setRecomendado(Boolean recomendado) {
-        this.recomendado = recomendado;
+    public void setServiciosCercanos(String serviciosCercanos) {
+        this.serviciosCercanos = serviciosCercanos;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
     }
 }

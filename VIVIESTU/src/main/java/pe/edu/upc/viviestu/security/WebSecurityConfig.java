@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,6 +41,91 @@ public class WebSecurityConfig {
     @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver exceptionResolver;
 
+    private static void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry req) {
+        req
+                .requestMatchers("/login").permitAll()
+
+                .requestMatchers("/api/v1/authentication/**").permitAll()
+                .requestMatchers("/v3/api-docs/**").permitAll()
+                .requestMatchers("/swagger-ui.html").permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/swagger-resources/**").permitAll()
+                .requestMatchers("/webjars/**").permitAll()
+
+                .requestMatchers("/usuarios/registro").permitAll()
+
+                /*
+                //USUARIO
+                .requestMatchers("/usuarios").permitAll()
+                .requestMatchers("/usuarios/listas").permitAll()
+                .requestMatchers("/usuarios/{id}").permitAll()
+
+                //ROLE
+                .requestMatchers("/roles/{id}").permitAll()
+                .requestMatchers("/roles/listas").permitAll()
+                .requestMatchers("/roles/nuevo").permitAll()
+                .requestMatchers("/roles").permitAll()
+
+                //ZONA
+                .requestMatchers("/zonas").permitAll()
+                .requestMatchers("/zonas/nuevo").permitAll()
+                .requestMatchers("/zonas/editar").permitAll()
+                //.requestMatchers("/zonas/lista").permitAll()
+                .requestMatchers("/zonas/{id}").permitAll()
+
+                //ZONA UNIVERSIDAD
+                .requestMatchers("/zona-universidad").permitAll()
+                .requestMatchers("/zona-universidad/lista").permitAll()
+                .requestMatchers("/zona-universidad/editar").permitAll()
+                .requestMatchers("/zona-universidad/nuevo").permitAll()
+                .requestMatchers("/zona-universidad/{id}").permitAll()
+
+                //VALORACION
+                .requestMatchers("/valoraciones").permitAll()
+                .requestMatchers("/valoraciones/nuevo").permitAll()
+                .requestMatchers("/valoraciones/editar").permitAll()
+                .requestMatchers("/valoraciones/lista").permitAll()
+                .requestMatchers("/valoraciones/{id}").permitAll()
+
+                //SIMULADOR
+                .requestMatchers("/simulador").permitAll()
+                .requestMatchers("/simulador/lista").permitAll()
+                .requestMatchers("/simulador/editar").permitAll()
+                .requestMatchers("/simulador/nuevo").permitAll()
+                .requestMatchers("/simulador/{id}").permitAll()
+
+                //REPORTE
+                .requestMatchers("/reportes").permitAll()
+                .requestMatchers("/reportes/lista").permitAll()
+                .requestMatchers("/reportes/nuevo").permitAll()
+                .requestMatchers("/reportes/editar").permitAll()
+                .requestMatchers("/reportes/{id}").permitAll()
+
+                //COMPARACION
+                .requestMatchers("/comparaciones").permitAll()
+                .requestMatchers("/comparaciones/editar").permitAll()
+                .requestMatchers("/comparaciones/nuevo").permitAll()
+                .requestMatchers("/comparaciones/lista").permitAll()
+                .requestMatchers("/comparaciones/{id}").permitAll()
+
+                //COMPARACION DETALLE
+                .requestMatchers("/comparacion-detalle").permitAll()
+                .requestMatchers("/comparacion-detalle/lista").permitAll()
+                .requestMatchers("/comparacion-detalle/nuevo").permitAll()
+                .requestMatchers("/comparacion-detalle/editar").permitAll()
+                .requestMatchers("/comparacion-detalle/{id}").permitAll()
+
+                //FAVORITO
+                .requestMatchers("/favoritos").permitAll()
+                .requestMatchers("/favoritos/nuevo").permitAll()
+                .requestMatchers("/favoritos/lista").permitAll()
+                .requestMatchers("/favoritos/{id}").permitAll()
+
+                 */
+
+                .anyRequest().authenticated();
+    }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
@@ -60,18 +146,7 @@ public class WebSecurityConfig {
         //Desde Spring Boot 3.1+
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req -> req
-                        .requestMatchers("/login").permitAll()
-
-                        .requestMatchers("/api/v1/authentication/**").permitAll()
-                        .requestMatchers("/v3/api-docs/**").permitAll()
-                        .requestMatchers("/swagger-ui.html").permitAll()
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/swagger-resources/**").permitAll()
-                        .requestMatchers("/webjars/**").permitAll()
-
-
-                        .anyRequest().authenticated()
+                .authorizeHttpRequests(WebSecurityConfig::customize
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractHttpConfigurer::disable)

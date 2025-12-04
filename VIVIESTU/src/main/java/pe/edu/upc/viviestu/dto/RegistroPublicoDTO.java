@@ -1,29 +1,13 @@
 package pe.edu.upc.viviestu.dto;
 
-import pe.edu.upc.viviestu.model.Role;
-
-import java.time.LocalDate;
-
-public class UsuarioDTO {
-    private Integer idUsuario;
+public class RegistroPublicoDTO {
     private String username;
-    private String correo;
     private String password;
+    private String correo;
     private String universidad;
     private Double presupuestoMensual;
     private String medioTransporte;
     private String cicloEstudio;
-    private Boolean estado;
-    private LocalDate fechaRegistro;
-    private Role role;
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     public String getUsername() {
         return username;
@@ -33,20 +17,20 @@ public class UsuarioDTO {
         this.username = username;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getUniversidad() {
@@ -79,29 +63,5 @@ public class UsuarioDTO {
 
     public void setCicloEstudio(String cicloEstudio) {
         this.cicloEstudio = cicloEstudio;
-    }
-
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
-    public LocalDate getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(LocalDate fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }

@@ -6,90 +6,90 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.viviestu.dto.ZonaDTO;
-import pe.edu.upc.viviestu.model.Zona;
-import pe.edu.upc.viviestu.service.ZonaService;
+import pe.edu.upc.viviestu.dto.RoleDTO;
+import pe.edu.upc.viviestu.model.Role;
+import pe.edu.upc.viviestu.service.RoleService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/zonas")
-public class ZonaController {
+@RequestMapping("/roles")
+public class RoleController {
     @Autowired
-    private ZonaService service;
+    private RoleService service;
 
-    // LISTAR TODO
-    @GetMapping("/lista")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USUARIO')")
-    public List<ZonaDTO> listar() {
+    // GET ALL
+    @GetMapping("/listas")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<RoleDTO> listar() {
         return service.listAll().stream().map(entity -> {
             ModelMapper m = new ModelMapper();
-            return m.map(entity, ZonaDTO.class);
+            return m.map(entity, RoleDTO.class);
         }).collect(Collectors.toList());
     }
 
-    // INSERTAR
+    // INSERT
     @PostMapping("/nuevo")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void insertar(@RequestBody ZonaDTO dto) {
+    public void insertar(@RequestBody RoleDTO dto) {
         ModelMapper m = new ModelMapper();
-        Zona z = m.map(dto, Zona.class);
-        service.insert(z);
+        Role r = m.map(dto, Role.class);
+        service.insert(r);
     }
 
-    // LISTAR POR ID
+    // GET BY ID
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listarId(@PathVariable("id") Integer id) {
 
-        Zona z = service.listId(id);
+        Role r = service.listId(id);
 
-        if (z == null) {
+        if (r == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No existe una zona con el ID: " + id);
+                    .body("No existe un rol con el ID: " + id);
         }
 
         ModelMapper m = new ModelMapper();
-        ZonaDTO dto = m.map(z, ZonaDTO.class);
+        RoleDTO dto = m.map(r, RoleDTO.class);
 
         return ResponseEntity.ok(dto);
     }
 
-    // ELIMINAR
+    // DELETE
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable("id") Integer id) {
 
-        Zona z = service.listId(id);
+        Role r = service.listId(id);
 
-        if (z == null) {
+        if (r == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No existe una zona con el ID: " + id);
+                    .body("No existe un rol con el ID: " + id);
         }
 
         service.delete(id);
 
-        return ResponseEntity.ok("Zona con ID " + id + " eliminada correctamente.");
+        return ResponseEntity.ok("Rol con ID " + id + " eliminado correctamente.");
     }
 
-    // MODIFICAR
-    @PutMapping("/editar")
+    // UPDATE
+    @PutMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> modificar(@RequestBody ZonaDTO dto) {
+    public ResponseEntity<String> modificar(@RequestBody RoleDTO dto) {
 
         ModelMapper m = new ModelMapper();
-        Zona z = m.map(dto, Zona.class);
+        Role r = m.map(dto, Role.class);
 
-        Zona existente = service.listId(z.getIdZona());
+        Role existente = service.listId(r.getId());
 
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe una zona con ID: " + z.getIdZona());
+                    .body("No se puede modificar. No existe un rol con ID: " + r.getId());
         }
 
-        service.edit(z);
+        service.edit(r);
 
-        return ResponseEntity.ok("Zona con ID " + z.getIdZona() + " modificada correctamente.");
+        return ResponseEntity.ok("Rol con ID " + r.getId() + " modificado correctamente.");
     }
 }

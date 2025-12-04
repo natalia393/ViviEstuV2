@@ -18,13 +18,17 @@ public class UsuarioService {
     public void insert(Usuario u) {
         usuarioRep.save(u);
     }
-    public Usuario listId(int idUsuario) {
+    public Usuario listId(Integer idUsuario) {
         return usuarioRep.findById(idUsuario).orElse(null);
     }
-    public void delete(int idUsuario) {
+    public void delete(Integer idUsuario) {
         usuarioRep.deleteById(idUsuario);
     }
     public void edit(Usuario u) {
         usuarioRep.save(u);
+    }
+
+    public boolean existeCorreo(String correo) {
+        return usuarioRep.existsByCorreo(correo);
     }
 }

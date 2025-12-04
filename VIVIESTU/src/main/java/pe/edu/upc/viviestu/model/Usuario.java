@@ -2,49 +2,45 @@ package pe.edu.upc.viviestu.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "usuarios")
-
 public class Usuario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUsuario;
 
-    @Column(name = "username", nullable = false)
+    @Column(nullable = false, length = 100)
     private String username;
 
-    @Column(name = "nombre_usuario", nullable = false)
-    private String nombreUsuario;
-
-    @Column(name = "fecha_nacimiento", nullable = false)
-    private String fechaNacimiento;
-
-    @Column(name = "correo", nullable = false)
+    @Column(nullable = false, unique = true, length = 120)
     private String correo;
 
-    @Column(name = "password", nullable = false)
+    @Column(nullable = false)
     private String password;
 
-    @Column(name = "verificado" ,nullable = false)
-    private boolean verificado = false;
+    @Column(length = 150)
+    private String universidad;
 
-    @Column(name = "enabled" ,nullable = false)
-    private Boolean  enabled;
+    private Double presupuestoMensual;
 
-    // Relación Uno a Muchos con Preferencias
-    /*
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<Preferencia> preferencias;
-     */
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private List<Role> roles;
+    @Column(length = 50)
+    private String medioTransporte;
 
-    public Usuario() {}
+    @Column(length = 50)
+    private String cicloEstudio;
+
+    private Boolean estado;
+
+    private LocalDate fechaRegistro;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Role role;
+
+    public Usuario() {
+    }
 
     public Integer getIdUsuario() {
         return idUsuario;
@@ -60,22 +56,6 @@ public class Usuario {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getCorreo() {
@@ -94,28 +74,60 @@ public class Usuario {
         this.password = password;
     }
 
-    public boolean isVerificado() {
-        return verificado;
+    public String getUniversidad() {
+        return universidad;
     }
 
-    public void setVerificado(boolean verificado) {
-        this.verificado = verificado;
+    public void setUniversidad(String universidad) {
+        this.universidad = universidad;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public Double getPresupuestoMensual() {
+        return presupuestoMensual;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setPresupuestoMensual(Double presupuestoMensual) {
+        this.presupuestoMensual = presupuestoMensual;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public String getMedioTransporte() {
+        return medioTransporte;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setMedioTransporte(String medioTransporte) {
+        this.medioTransporte = medioTransporte;
+    }
+
+    public String getCicloEstudio() {
+        return cicloEstudio;
+    }
+
+    public void setCicloEstudio(String cicloEstudio) {
+        this.cicloEstudio = cicloEstudio;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public LocalDate getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
 

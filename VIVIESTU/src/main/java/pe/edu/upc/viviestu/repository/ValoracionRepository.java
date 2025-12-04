@@ -2,9 +2,8 @@ package pe.edu.upc.viviestu.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pe.edu.upc.viviestu.model.Zona;
+import pe.edu.upc.viviestu.model.Valoracion;
 
 @Repository
-public interface ZonaRepository extends JpaRepository<Zona, Integer> {
-
+public interface ValoracionRepository extends JpaRepository<Valoracion, Integer> {
 }

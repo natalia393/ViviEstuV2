@@ -12,19 +12,23 @@ public class FavoritoService {
     @Autowired
     private FavoritoRepository favoritoRep;
 
-    public List<Favorito> listAll(){
+    public List<Favorito> listAll() {
         return favoritoRep.findAll();
     }
+
     public void insert(Favorito f) {
         favoritoRep.save(f);
     }
-    public Favorito listId(int idFavorito) {
+
+    public Favorito listId(Integer idFavorito) {
         return favoritoRep.findById(idFavorito).orElse(null);
     }
-    public void delete(int idFavorito) {
+
+    public void delete(Integer idFavorito) {
         favoritoRep.deleteById(idFavorito);
     }
-    public void edit(Favorito f) {
-        favoritoRep.save(f);
+
+    public List<Favorito> listByUsuario(Integer idUsuario) {
+        return favoritoRep.findByUsuario_IdUsuario(idUsuario);
     }
 }

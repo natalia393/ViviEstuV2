@@ -9,16 +9,31 @@ public class Zona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idZona;
 
-    @Column(name = "nombreZona", nullable = false)
+    @Column(nullable = false, length = 120)
     private String nombreZona;
-    @Column(name = "precioPromedio", nullable = false)
+
+    @Column(nullable = false, length = 120)
+    private String distrito;
+
     private Double precioPromedio;
-    @Column(name = "seguridad", nullable = false)
-    private String seguridad; // ej "alta", "media", "baja"
-    @Column(name = "transporteDisponible", nullable = false)
-    private String transporteDisponible; // ej "bus, carro, caminar"
-    @Column(name = "recomendado", nullable = false)
-    private Boolean recomendado; // ej "true" = Recomendado, "false" = Recomendar
+
+    private Integer nivelSeguridad;
+
+    @Column(length = 200)
+    private String accesibilidadTransporte;
+
+    @Column(length = 300)
+    private String serviciosCercanos;
+
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
+
+    private Double latitud;
+
+    private Double longitud;
+
+    @Column(length = 500)
+    private String imagenUrl;
 
     public Zona() {
     }
@@ -39,6 +54,14 @@ public class Zona {
         this.nombreZona = nombreZona;
     }
 
+    public String getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
+    }
+
     public Double getPrecioPromedio() {
         return precioPromedio;
     }
@@ -47,27 +70,59 @@ public class Zona {
         this.precioPromedio = precioPromedio;
     }
 
-    public String getSeguridad() {
-        return seguridad;
+    public Integer getNivelSeguridad() {
+        return nivelSeguridad;
     }
 
-    public void setSeguridad(String seguridad) {
-        this.seguridad = seguridad;
+    public void setNivelSeguridad(Integer nivelSeguridad) {
+        this.nivelSeguridad = nivelSeguridad;
     }
 
-    public String getTransporteDisponible() {
-        return transporteDisponible;
+    public String getAccesibilidadTransporte() {
+        return accesibilidadTransporte;
     }
 
-    public void setTransporteDisponible(String transporteDisponible) {
-        this.transporteDisponible = transporteDisponible;
+    public void setAccesibilidadTransporte(String accesibilidadTransporte) {
+        this.accesibilidadTransporte = accesibilidadTransporte;
     }
 
-    public Boolean getRecomendado() {
-        return recomendado;
+    public String getServiciosCercanos() {
+        return serviciosCercanos;
     }
 
-    public void setRecomendado(Boolean recomendado) {
-        this.recomendado = recomendado;
+    public void setServiciosCercanos(String serviciosCercanos) {
+        this.serviciosCercanos = serviciosCercanos;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
     }
 }

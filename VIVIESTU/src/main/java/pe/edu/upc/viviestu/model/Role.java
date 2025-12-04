@@ -2,28 +2,22 @@ package pe.edu.upc.viviestu.model;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-
 @Entity
-@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "rol"})})
-public class Role implements Serializable {
+@Table(name = "roles")
+public class Role{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String rol;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Usuario usuario;
 
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -35,11 +29,4 @@ public class Role implements Serializable {
         this.rol = rol;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 }
